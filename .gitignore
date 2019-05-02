@@ -1,0 +1,11 @@
+x64/*
+packages/*
+imgs/*
+lib/*
+Debug/*
+Release/*
+.vs/*
+gui/HeadPose-live/obj/*
+gui/OpenFaceDemo/obj/*
+gui/OpenFaceOffline/obj/*
+exe/*
