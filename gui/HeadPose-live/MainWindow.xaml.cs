@@ -195,8 +195,8 @@ namespace HeadPoseLive
 
         #region WAMP
         private bool IsBroadcastingToWAMP = false;
-        private string WAMPRouterAdress = "ws://10.50.5.161:8080/ws";
-        private const string WAMPRealm = "realm1";
+        private string WAMPRouterAdress = "ws://127.0.0.1:8080/ws";
+        private string WAMPRealm = "realm1";
         private string EyeDataTopic = "EyeDataSample";
         private string HeadDataTopic = "NatNetDataSample";
         private string OpenFaceTopic = "SynOpticon.OpenFaceSample";
@@ -216,6 +216,19 @@ namespace HeadPoseLive
 
         private void CreateWAMPClient()
         {
+            using (var reader = new System.IO.StreamReader(@"./crossbar_config.csv"))
+            {
+                List<string> listA = new List<string>();
+                List<string> listB = new List<string>();
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+                    WAMPRouterAdress = values[0];
+                    WAMPRealm = values[1];
+                }
+            }
+
             OpenFaceDataSamples = new ConcurrentQueue<OpenFaceDataStruct>();
             //EyeDataSamples = new ConcurrentQueue<EyeDataStruct>();
             //HeadDataSamples = new ConcurrentQueue<List<float>>();
